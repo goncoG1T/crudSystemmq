@@ -1,0 +1,34 @@
+create database systemmq;
+
+create table systemmq.sys_admin(
+	sys_id int not null auto_increment,
+	sys_nome varchar(255) not null,
+	sys_idade varchar (10) not null,
+	primary key (sys_id));
+    
+create table systemmq.maq_maquina(
+	maq_id int not null auto_increment,
+	maq_modelo varchar(255) not null,
+	maq_os varchar (255) not null,
+	maq_ano varchar (10) not null,
+	primary key (maq_id));
+
+create table systemmq.sysmq_sysmq(
+	sysmq_id int not null auto_increment,
+	sysmq_idSys int not null,
+	sysmq_idMaq int not null,
+	sysmq_obs varchar (255) not null,
+    	primary key (sysmq_id));
+        
+create table systemmq.usu_usuario(
+    usu_id int not null auto_increment,
+    usu_login varchar (30) not null,
+    usu_senha varchar (30) not null,
+    usu_status varchar (30) not null,
+    usu_tipo varchar (30) not null,
+    primary key (usu_id));
+
+ALTER TABLE systemmq.sysmq_sysmq ADD CONSTRAINT fk_sysmq_idSys FOREIGN KEY (sysmq_idSys) REFERENCES systemmq.sys_admin(sys_id) ;
+ALTER TABLE systemmq.sysmq_sysmq ADD CONSTRAINT fk_sysmq_idMaq FOREIGN KEY (sysmq_idMaq) REFERENCES systemmq.maq_maquina(maq_id) ;
+#drop database systemmq; 
+#insert into systemmq.usu_usuario(usu_login, usu_senha, usu_status,usu_tipo) values ("root","1234","ativo","admin");
